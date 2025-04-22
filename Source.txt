@@ -1,0 +1,8 @@
+https://www.kaggle.com/datasets/kmader/parkinsons-drawings (archive.zip)
+https://data.mendeley.com/datasets/fd5wd6wmdj/1 (Parkinson’s Disease Detection Using Spiral Images (Hand Drawings).zip)
+https://www.kaggle.com/datasets/banilkumar20phd7071/handwritten-parkinsons-disease-augmented-data?select=Dataset (dataset.zip)
+https://archive.ics.uci.edu/dataset/395/parkinson+disease+spiral+drawings+using+digitized+graphics+tablet (parkinson+disease+spiral+drawings+using+digitized+graphics+tablet.zip)
+
+Not Yet Downloaded 
+
+https://wwwp.fc.unesp.br/~papa/pub/datasets/Handpd/

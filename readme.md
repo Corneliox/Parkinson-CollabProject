@@ -32,47 +32,73 @@ This project focuses on evaluating various YOLO models for detecting signs of **
 
 ## 🧪 Experiment Setup Instructions
 
-#Instruction
+This project evaluates YOLO models from **YOLOv3 to YOLOv11**, focusing on hand-drawn patterns that are indicative of Parkinson's Disease. Two types of input (spirals and waves) are used with consistent preprocessing.
 
 ---
 
 ### 📁 Dataset Details
-#Details
+- **Content**: Hand-drawn spirals and waves
+- **Purpose**: Parkinson detection
+- **Labels**: Binary (Parkinson / Non-Parkinson)
+- **Annotation**: 
+  - Bounding boxes for detection (LabelImg, Roboflow)
+  - Masks for segmentation (Roboflow recommended)
 
 ---
 
 ### 🧹 Preprocessing
-#Preprocess Brief
+- **Augmented Version**:
+  - Random rotation
+  - Scaling
+  - Brightness/contrast
+- **Non-Augmented Version**: Raw input only
+- All images resized to **640x640**
 
 ---
 
 ### 🧠 Models Used
 
-#Model Brief
+| Model Type     | Versions     | Framework      | Notes                          |
+|----------------|--------------|----------------|--------------------------------|
+| Detection      | YOLOv3 - v8  | Ultralytics & Darknet | Classic object detection     |
+| Segmentation   | YOLOv9 - v11 | Ultralytics    | For region-based detection     |
 
-#Split Model 
+Each model is trained under two data splits:
+- **80/20** (Train/Test)
+- **70/30** (Train/Test)
 
-#Train Setup
+Common training setup:
+```
+imgsz=640
+epochs=50
+batch=16
+```
+
+---
 
 ### ⚙️ Training Command Examples
 
-#Bash Detection (YOLOv5 - YOLOv8)
+#### 🔹 Detection (YOLOv5 - YOLOv8)
+```bash
+yolo task=detect mode=train model=yolov8n.pt data=parkinson.yaml epochs=50 imgsz=640
+```
 
-
-#Bash Segmentation (YOLOv9 - YOLOv11)
+#### 🔹 Segmentation (YOLOv9 - YOLOv11)
+```bash
+yolo task=segment mode=train model=yolov9n-seg.pt data=parkinson.yaml epochs=50 imgsz=640
+```
 
 ---
 
 ### 📊 Evaluation Metrics
-#Detection
-
-#Segmentation
+- **Detection**: `mAP@0.5`, `Precision`, `Recall`, `F1-score`, `Loss`
+- **Segmentation**: `mAP@0.5`, `IoU`, `Segmentation Loss`
 
 ---
 
 ### 📈 Output
- #Output Session
+All model results (metrics, losses, etc.) will be compiled into a structured **Excel sheet** for direct comparison. These will help identify the best-performing model configuration for Parkinson's pattern detection.
 
 ---
 
-#Contribution Session
+Feel free to contribute or experiment with new augmentations, split ratios, or model tweaks. Let’s help bring better insights into early Parkinson’s detection through visual cues.

@@ -8,8 +8,8 @@ This workflow is designed for building a YOLO-based Parkinson's Disease hand-dra
 - Gather hand-drawn spiral and wave images.
 
 ### Label Your Data
-- Use **LabelImg** for bounding boxes.
-- Use **Roboflow** for segmentation masks.
+- Use **LabelImg** for bounding boxes. ❎
+- Use **Roboflow** for segmentation masks. ✅
 
 ### Organize into YOLO Format
 ```

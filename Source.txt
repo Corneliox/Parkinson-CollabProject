@@ -1,7 +1,43 @@
 https://www.kaggle.com/datasets/kmader/parkinsons-drawings (archive.zip)
+- archive
+    spiral
+        - testing
+            - healthy
+            - parkinson
+        - training
+            - healthy
+            - parkinson
+    wave
+        - testing
+            - healthy
+            - parkinson
+        - training
+            - healthy
+            - parkinson
+
 https://data.mendeley.com/datasets/fd5wd6wmdj/1 (Parkinson’s Disease Detection Using Spiral Images (Hand Drawings).zip)
+- Parkinson’s Disease Detection Using Spiral Images (Hand Drawings)
+    - Parkinson Dataset
+        - dataset
+            - spiral
+                - testing
+                - training
+            - wave
+                - testing
+                - training
+
 https://www.kaggle.com/datasets/banilkumar20phd7071/handwritten-parkinsons-disease-augmented-data?select=Dataset (dataset.zip)
-https://archive.ics.uci.edu/dataset/395/parkinson+disease+spiral+drawings+using+digitized+graphics+tablet (parkinson+disease+spiral+drawings+using+digitized+graphics+tablet.zip)
+- Dataset
+    - Healthy
+    - Parkinson
+
 https://wwwp.fc.unesp.br/~papa/pub/datasets/Handpd/
+- HealthySpiral
+    - HealthySpiral
+- PatientSpiral
+    - PatientSpiral
+
+https://archive.ics.uci.edu/dataset/395/parkinson+disease+spiral+drawings+using+digitized+graphics+tablet (parkinson+disease+spiral+drawings+using+digitized+graphics+tablet.zip)
+Not used... Txt Format
 
 Will be moved to readme.md

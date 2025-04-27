@@ -102,3 +102,84 @@ All model results (metrics, losses, etc.) will be compiled into a structured **E
 ---
 
 Feel free to contribute or experiment with new augmentations, split ratios, or model tweaks. Let’s help bring better insights into early Parkinson’s detection through visual cues.
+
+### 🗃️ Dataset Used Path
+
+This project utilizes multiple datasets related to Parkinson’s disease hand-drawing analysis (spirals and waves).  
+Below are the datasets organized and described based on their structure:
+
+---
+
+#### 📂 1. [Kaggle - Parkinson's Drawings Dataset](https://www.kaggle.com/datasets/kmader/parkinsons-drawings) (`archive.zip`)
+**Folder Structure**:
+```
+archive/
+└── spiral/
+    ├── testing/
+    │   ├── healthy/
+    │   └── parkinson/
+    └── training/
+        ├── healthy/
+        └── parkinson/
+└── wave/
+    ├── testing/
+    │   ├── healthy/
+    │   └── parkinson/
+    └── training/
+        ├── healthy/
+        └── parkinson/
+```
+
+---
+
+#### 📂 2. [Mendeley Data - Parkinson's Spiral Dataset](https://data.mendeley.com/datasets/fd5wd6wmdj/1) (`Parkinson’s Disease Detection Using Spiral Images (Hand Drawings).zip`)
+**Folder Structure**:
+```
+Parkinson’s Disease Detection Using Spiral Images (Hand Drawings)/
+└── Parkinson Dataset/
+    └── dataset/
+        ├── spiral/
+        │   ├── testing/
+        │   └── training/
+        └── wave/
+            ├── testing/
+            └── training/
+```
+
+---
+
+#### 📂 3. [Kaggle - Handwritten Parkinson’s Disease (Augmented)](https://www.kaggle.com/datasets/banilkumar20phd7071/handwritten-parkinsons-disease-augmented-data) (`dataset.zip`)
+**Folder Structure**:
+```
+Dataset/
+├── Healthy/
+└── Parkinson/
+```
+
+---
+
+#### 📂 4. [HandPD - UNESP Handwritten Parkinson’s Dataset](https://wwwp.fc.unesp.br/~papa/pub/datasets/Handpd/)
+**Folder Structure**:
+```
+HealthySpiral/
+└── HealthySpiral/
+
+PatientSpiral/
+└── PatientSpiral/
+```
+
+---
+
+#### 📂 5. [UCI Machine Learning Repository - Parkinson Spiral Drawing Dataset](https://archive.ics.uci.edu/dataset/395/parkinson+disease+spiral+drawings+using+digitized+graphics+tablet) (`parkinson+disease+spiral+drawings+using+digitized+graphics+tablet.zip`)
+**Note**:  
+- This dataset contains **.txt files (raw pen signal recordings)** rather than direct image files.
+- ❗ **Currently not used in the image-based YOLO training pipeline.**
+- May be used later for signal analysis or reconstructed plotting.
+
+---
+
+> 📌 **Important**:  
+> For training YOLO models, only datasets providing **direct images (spiral/wave drawings)** are used in the pipeline.  
+> Datasets containing only raw signals (`.txt`) must first be **converted to images**.
+
+---

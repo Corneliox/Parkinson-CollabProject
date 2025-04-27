@@ -1,40 +1,72 @@
+import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import os
+import os  # Untuk manipulasi path
 
-# Define file name
-name = "circA-H11"
+def visualize_handpd_data(file_path, output_file):
+    """
+    Visualizes HandPD data from a .txt file, plotting the X and Y coordinates,
+    and saves the plot to a PNG file.
 
-# Path to your input file
-input_path = fr"C:\Users\Pongo\OneDrive\Documents\~Cornel\~Ideas n Innovation\Project\25-4-22 -- Parkinson Unika\Dataset\UNESP\Healthy\Signal\{name}"
+    Args:
+        file_path (str): The path to the HandPD .txt file.
+        output_file (str): The path where the output PNG file should be saved.
+    """
 
-# Output folder
-output_folder = fr"C:\Users\Pongo\OneDrive\Documents\~Cornel\~Ideas n Innovation\Project\25-4-22 -- Parkinson Unika"
+    try:
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
 
-# Load data
-data = np.loadtxt(input_path, comments='#')
+        data_lines = []
+        for line in lines:
+            if not line.startswith('#') and not line.startswith('<'):  # Skip metadata lines
+                data_lines.append(line.strip().split('\t'))
 
-# Assume column 0 = X, column 1 = Y
-x = data[:, 0]
-y = data[:, 1]
+        df = pd.DataFrame(data_lines)
+        df = df.apply(pd.to_numeric, errors='coerce')  # Convert to numeric, handle errors
 
-# Normalize if needed
-x = (x - np.min(x)) / (np.max(x) - np.min(x)) * 400  # Scale to 0–400
-y = (y - np.min(y)) / (np.max(y) - np.min(y)) * 400
+        # Extract X and Y coordinates (assuming they are the first two columns)
+        x = df.iloc[:, 0].dropna()
+        y = df.iloc[:, 1].dropna()
 
-# Swap X and Y if needed
-# x, y = y, x  # Uncomment if swapping is needed
+        # Check if we have enough data to plot
+        if len(x) < 2 or len(y) < 2:
+            print("Error: Not enough data points to plot.")
+            return
 
-# Plot
-plt.figure(figsize=(6, 6))
-plt.plot(x, y, 'b-', linewidth=1)
-plt.gca().invert_yaxis()  # Flip Y axis (important for hand drawings)
-plt.axis('off')
-plt.gca().set_aspect('equal', adjustable='box')
+        # Create the plot
+        plt.figure(figsize=(8, 8))  # Adjust figure size as needed
+        plt.plot(x, y, linestyle='-', marker='.', markersize=1)  # Plot lines and points
+        plt.xlabel("X Coordinate")
+        plt.ylabel("Y Coordinate")
+        plt.title("HandPD Data Visualization")
+        plt.gca().invert_yaxis()  # Invert Y-axis to match typical writing orientation
+        plt.axis('equal')  # Ensure equal scaling for X and Y axes
 
-# Save
-output_file = os.path.join(output_folder, name.replace('.txt', '.png'))
-plt.savefig(output_file, bbox_inches='tight', pad_inches=0)
-plt.close()
+        # Save the image
+        plt.savefig(output_file, bbox_inches='tight', pad_inches=0)
+        plt.close()
+        print(f"Visualization saved to {output_file}")
 
-print(f"Image saved at: {output_file}")
+    except FileNotFoundError:
+        print(f"Error: File not found at {file_path}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    # Set the filename
+    name = "circA-H4"  # You can change this to the desired filename
+
+    # Path to your input .txt file
+    input_path = fr"C:\Users\Pongo\OneDrive\Documents\~Cornel\~Ideas n Innovation\Project\25-4-22 -- Parkinson Unika\Dataset\UNESP\Healthy\Signal\{name}.txt"
+
+    # Path to your output folder
+    output_folder = fr"C:\Users\Pongo\OneDrive\Documents\~Cornel\~Ideas n Innovation\Project\25-4-22 -- Parkinson Unika"
+
+    # Ensure the output folder exists
+    os.makedirs(output_folder, exist_ok=True)
+
+    # Save the image
+    output_file = os.path.join(output_folder, f'{name}.png')
+
+    visualize_handpd_data(input_path, output_file)

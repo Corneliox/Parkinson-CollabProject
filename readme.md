@@ -39,7 +39,16 @@ This project evaluates YOLO models from **YOLOv3 to YOLOv11**, focusing on hand-
 ### 📁 Dataset Details
 - **Content**: Hand-drawn spirals and waves
 - **Purpose**: Parkinson detection
+- **Image Resolution**: 512 x 512 px
 - **Labels**: Binary (Parkinson / Non-Parkinson)
+  - Healthy Spiral
+    - A smoothly drawn, nearly perfect circle. The line is consistent in thickness, without tremors, hesitations, or irregularities. The spacing within the circle, if it's a spiral, is even. The circle is well-formed and controlled.
+  - Healthy Wave
+    - The waveform exhibits a consistent and somewhat rectangular shape with rounded peaks and troughs. The upward slope (representing exhalation) is relatively steep and consistent across cycles. The plateau at the peak is fairly level. The downward slope (representing inhalation) is also relatively steep and returns cleanly to the baseline. The cycles appear regular and uniform in width and height, indicating consistent and even breathing. There are no significant irregularities, sharp peaks, or unevenness in the pattern.
+  - Patient Spiral
+    -  The spiral drawing exhibits a noticeably irregular and shaky line, indicative of tremor. The spacing between the loops varies significantly, and the overall form lacks the smooth, consistent expansion seen in a healthy spiral. There are visible hesitations and minor changes in direction, resulting in a less controlled and somewhat jagged appearance.
+  - Patient Wave
+    - The waveform shows an irregular pattern. The upward and downward slopes are uneven, and the plateaus at the peaks are inconsistent. The cycles vary in width and height, indicating an unsteady breathing pattern.
 - **Annotation**: 
   - Bounding boxes for detection (LabelImg, Roboflow)
   - Masks for segmentation (Roboflow recommended)
@@ -52,7 +61,7 @@ This project evaluates YOLO models from **YOLOv3 to YOLOv11**, focusing on hand-
   - Scaling
   - Brightness/contrast
 - **Non-Augmented Version**: Raw input only
-- All images resized to **640x640**
+- All images resized to **512 x 512**
 
 ---
 
@@ -69,7 +78,7 @@ Each model is trained under two data splits:
 
 Common training setup:
 ```
-imgsz=640
+imgsz=512
 epochs=50
 batch=16
 ```
@@ -80,12 +89,12 @@ batch=16
 
 #### 🔹 Detection (YOLOv5 - YOLOv8)
 ```bash
-yolo task=detect mode=train model=yolov8n.pt data=parkinson.yaml epochs=50 imgsz=640
+yolo task=detect mode=train model=yolov8n.pt data=parkinson.yaml epochs=50 imgsz=512
 ```
 
 #### 🔹 Segmentation (YOLOv9 - YOLOv11)
 ```bash
-yolo task=segment mode=train model=yolov9n-seg.pt data=parkinson.yaml epochs=50 imgsz=640
+yolo task=segment mode=train model=yolov9n-seg.pt data=parkinson.yaml epochs=50 imgsz=512
 ```
 
 ---
@@ -170,16 +179,4 @@ PatientSpiral/
 
 ---
 
-#### 📂 5. [UCI Machine Learning Repository - Parkinson Spiral Drawing Dataset](https://archive.ics.uci.edu/dataset/395/parkinson+disease+spiral+drawings+using+digitized+graphics+tablet) (`parkinson+disease+spiral+drawings+using+digitized+graphics+tablet.zip`)
-**Note**:  
-- This dataset contains **.txt files (raw pen signal recordings)** rather than direct image files.
-- ❗ **Currently not used in the image-based YOLO training pipeline.**
-- May be used later for signal analysis or reconstructed plotting.
 
----
-
-> 📌 **Important**:  
-> For training YOLO models, only datasets providing **direct images (spiral/wave drawings)** are used in the pipeline.  
-> Datasets containing only raw signals (`.txt`) must first be **converted to images**.
-
----

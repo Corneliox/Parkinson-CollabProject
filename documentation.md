@@ -140,3 +140,26 @@ Uploading it into
 - 70/30 Drawing : [**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/)
 - 80/20 Drawing : [**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/)
 
+#### 5.55 P.M
+Deciding to auto annotate the Data based on file name, rememmbering that i had already split the data name by coincidence before, with logic of : 
+
+```
+Image format 512 x 512
+
+Make label 
+0 : healthy spiral
+1 : healthy wave
+2 : parkinson spiral
+3 : parkinson wave
+
+For each folder who had "Healthy" in folder spiral :
+- Make label 0 with full  Bounding Box (annotate full resolution of images)
+Else : 
+- make label 2 with full Bounding Box (annotate full resolution of images)
+
+For each folder who had "Wave" in folder wave :
+- Make label 1 with full  Bounding Box (anotate all images)
+Else : 
+- make label 3 with full Bounding Box (annotate full resolution of images)
+```
+

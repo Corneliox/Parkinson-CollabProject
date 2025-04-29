@@ -67,7 +67,7 @@ HealthySpiral/
 PatientSpiral/
 └── PatientSpiral/
 ```
-
+---
 ---
 
 ## 📅 April 28, 2025
@@ -77,4 +77,65 @@ Today, I began the process of resizing all collected images to a uniform size of
 - Resized images to 512x512 pixels.
 - Began annotating the dataset for training purposes.
 
+## 📝 Resize Method Explanation
+
+In the dataset pre-processing step, all hand-drawing images were resized to a fixed dimension of **512 × 512 pixels** using the **LANCZOS resampling method**.
+
 ---
+
+### 📏 Why Resizing?
+
+- To standardize the input dimensions for the YOLO models.
+- To ensure consistent training and inference performance across the dataset.
+
+---
+
+### 📐 Why 512×512?
+
+- **512** is a common size that balances:
+  - Detail preservation
+  - Computational efficiency
+- It is a good compromise between memory usage and model accuracy, especially important when handling medical image datasets.
+
+---
+
+### 🔍 Resizing Method Used
+
+- **LANCZOS interpolation** (also known as Lanczos resampling).
+
+---
+
+### 🧠 About LANCZOS
+
+- A **high-quality resampling algorithm** based on the sinc function.
+- Designed for **both downscaling and upscaling** images.
+- Preserves **more fine details** compared to simpler methods like bilinear or nearest neighbor.
+- Especially effective when high accuracy in preserving edges and fine details is important — **critical for medical datasets**, such as Parkinson's hand-drawing tasks.
+
+---
+
+### 🛠 Technical Note
+
+- Implemented via **Python's Pillow (PIL) library**.
+- Accessed by using the flag: `Image.LANCZOS`.
+- It is considered **the best choice** when resizing datasets where fine-grained distortions (e.g., tremors in spiral drawings) must be preserved.
+
+---
+
+### 📚 Short Summary for Report
+
+> All images were resized to **512 × 512 pixels** using the **LANCZOS interpolation method** to preserve fine details and ensure standardized input size for model training.
+
+---
+---
+
+## 📅 April 29, 2025
+#### 8.28 A.M
+Succesfully splitting into 80/20 - 70/30 and changing my format into 
+
+[**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/parkinsons-drawings) by "K Scott Mader"
+
+Uplaoding it into 
+
+70/30 Drawing : [**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/)
+80/20 Drawing : [**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/)

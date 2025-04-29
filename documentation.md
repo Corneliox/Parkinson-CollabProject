@@ -135,7 +135,8 @@ Succesfully splitting into 80/20 - 70/30 and changing my format into
 
 [**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/parkinsons-drawings) by "K Scott Mader"
 
-Uplaoding it into 
+Uploading it into 
 
-70/30 Drawing : [**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/)
-80/20 Drawing : [**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/)
+- 70/30 Drawing : [**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/)
+- 80/20 Drawing : [**Parkinson's Drawings**](https://www.kaggle.com/datasets/kmader/)
+

@@ -221,3 +221,20 @@ Thanks to ChatGPT for the great help for minimalizing time, All File already Ren
             -> util_autolabeling.py #Auto Label because 1 image, 1 item
                 -> util_merge_to_4_class_yolo.py #merge into Train and Val Yolo Only
 ```
+
+#### 12.00 AM 
+After Merge into Train and Val Format Only 
+```
+📁 YOLODatasetFull/
+├── 📁 images/
+│   ├── 📁 train/
+│   └── 📁 val/
+├── 📁 labels/
+│   ├── 📁 train/
+│   └── 📁 val/
+└── 📄 parkinson_full.yaml
+```
+You can use `change_split_gui_selecteble.py` to change Ratio
+
+#### 12.50 PM 
+Revising the logic on 

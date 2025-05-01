@@ -163,3 +163,50 @@ Else :
 - make label 3 with full Bounding Box (annotate full resolution of images)
 ```
 
+--- 
+---
+## 📅 April 30 - Mei 1, 2025
+### April 30 
+dataset already Moved all into a new dataset and can be annotated Automatically for boxes, and so and so, dont seems any prolem occure during the process, keep continuing.
+
+### Mei 1 
+#### 8 AM 
+Error Occure on ne Name applied there, which Some Duplicated, but the problem resolved clear
+
+#### 10 AM 
+Problem Occure when i want to simplify the Tree Directory from 
+
+```
+📁 YOLODataset/ 
+├── 📁 spiral/
+│   ├── 📁 images/
+│   │   ├── 📁 train/ (image here) 
+│   │   └── 📁 val/ (image here) 
+│   └── 📁 labels/
+│       ├── 📁 train/
+│       └── 📁 val/
+├── 📁 wave/
+│   ├── 📁 images/
+│   │   ├── 📁 train/ (image here) 
+│   │   └── 📁 val/ (image here) 
+│   └── 📁 labels/
+│       ├── 📁 train/
+│       └── 📁 val/
+└── 📄 spiral.yaml
+└── 📄 wave.yaml
+```
+Into something more simpler into this path : 
+```
+📁 YOLODatasetFull/
+├── 📁 images/
+│   ├── 📁 train/
+│   └── 📁 val/
+├── 📁 labels/
+│   ├── 📁 train/
+│   └── 📁 val/
+└── 📄 parkinson_full.yaml
+```
+
+Which encoutering More problem when **Name was Crashed each other**... , Logic that may solve this was 
+
+***Auto rename it all***

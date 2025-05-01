@@ -210,3 +210,14 @@ Into something more simpler into this path :
 Which encoutering More problem when **Name was Crashed each other**... , Logic that may solve this was 
 
 ***Auto rename it all***
+
+#### 11.47 AM
+Thanks to ChatGPT for the great help for minimalizing time, All File already Renamed.. The Workflow Should be 
+
+```python
+-> util_512Mod.py  #Resizing all image into 512
+    -> util_512toYolo.py #Change into Yolo Format File
+        -> util_rename.py #Change name into one format to help labelling
+            -> util_autolabeling.py #Auto Label because 1 image, 1 item
+                -> util_merge_to_4_class_yolo.py #merge into Train and Val Yolo Only
+```

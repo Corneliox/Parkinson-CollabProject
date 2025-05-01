@@ -1,31 +1,38 @@
 import os
 from pathlib import Path
 
-# Set your target directory
-target_dir = r".\Dataset\YOLODataset\wave\images\train\Healthy4.png"  # <- CHANGE THIS!
+# Base YOLO dataset directory
+base_dir = Path(r"./Dataset/YOLODataset")
 
-# Get list of all image files
-all_files = [f for f in Path(target_dir).glob("*.*") if f.suffix.lower() in ['.jpg', '.jpeg', '.png']]
+# Subfolders to process in order
+subfolders = [
+    base_dir / "spiral" / "images" / "train",
+    base_dir / "spiral" / "images" / "val",
+    base_dir / "wave" / "images" / "train",
+    base_dir / "wave" / "images" / "val",
+]
 
-# Counters
+# Counters across all folders
 healthy_count = 1
 parkinson_count = 1
 
-# Process files
-for file_path in sorted(all_files):
-    filename = file_path.name.lower()
+for target_dir in subfolders:
+    print(f"\n🔁 Processing folder: {target_dir}")
 
-    if 'healthy' in filename:
-        new_name = f"healthy_{healthy_count}{file_path.suffix.lower()}"
-        healthy_count += 1
-    else:
-        new_name = f"parkinson_{parkinson_count}{file_path.suffix.lower()}"
-        parkinson_count += 1
+    all_files = [f for f in target_dir.glob("*.*") if f.suffix.lower() in ['.jpg', '.jpeg', '.png']]
 
-    new_path = file_path.parent / new_name
-    os.rename(file_path, new_path)
-    print(f"✅ Renamed: {file_path.name} → {new_name}")
+    for file_path in sorted(all_files):
+        filename = file_path.name.lower()
 
-print("\n🎯 Renaming complete!")
-# Note: Make sure to change the target_dir variable to the path of your folder containing the images.
-# This script will rename all images in the specified directory, prefixing them with "healthy_" or "parkinson_"
+        if 'healthy' in filename:
+            new_name = f"healthy_{healthy_count}{file_path.suffix.lower()}"
+            healthy_count += 1
+        else:
+            new_name = f"parkinson_{parkinson_count}{file_path.suffix.lower()}"
+            parkinson_count += 1
+
+        new_path = file_path.parent / new_name
+        os.rename(file_path, new_path)
+        print(f"✅ Renamed: {file_path.name} → {new_name}")
+
+print("\n🎯 Renaming across all folders complete!")

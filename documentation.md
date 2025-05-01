@@ -237,4 +237,10 @@ After Merge into Train and Val Format Only
 You can use `change_split_gui_selecteble.py` to change Ratio
 
 #### 12.50 PM 
-Revising the logic on 
+Revising the logic on `change_split_gui_selecteble.py` so it will : 
+- Recursively find all images inside   `images/`
+- Flatten dan re-split ecerything into a fresh new train/val structure
+- Move `.txt` labels to match
+
+#### 13.00 PM 
+Error occured multiple times, further update will be created after Finishing project

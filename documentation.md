@@ -244,3 +244,8 @@ Revising the logic on `change_split_gui_selecteble.py` so it will :
 
 #### 13.00 PM 
 Error occured multiple times, further update will be created after Finishing project
+
+## 📅 Mei 2, 2025
+
+#### 10.00 AM 
+Got Not Implemented Error, need to validate Yolo Labels on image and val

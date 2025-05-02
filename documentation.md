@@ -272,5 +272,23 @@ Train for first time with settings :
 | **Model**        | yolov8x            | ⚠️ Use `yolov8n/s.pt`        |
 ```
 
-#### 12.30
+#### 12.30 PM
 Train using s and n series also reduce the batch for better performance
+
+#### 15.30 PM
+**8s** Did Great Job there but memory usage just 1 from 4 Gigs available, gonna upgrade the **Batch** into 8 and using model 8m for test
+
+Result : 
+```
+Model: yolov8s_model
+Validation Time: 2025-05-02 14-34-22
+
+AP50: 0.8599
+AP: 0.8557
+Precision: 0.7571
+Recall: 0.8728
+F1-Score: [0.5822, 0.8804, 0.7444, 0.9025]
+
+TIme elapsed : 122 Minutes
+```
+

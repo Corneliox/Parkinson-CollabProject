@@ -249,3 +249,28 @@ Error occured multiple times, further update will be created after Finishing pro
 
 #### 10.00 AM 
 Got Not Implemented Error, need to validate Yolo Labels on image and val
+
+#### 10.13 
+Torch vision Eror : 
+
+```
+NotImplementedError: Could not run 'torchvision::nms' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. 'torchvision::nms' is only available for these backends: [CPU, Meta, QuantizedCPU, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functionalize, Named, Conjugate, Negative, ZeroTensor, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradMPS, AutogradXPU, AutogradHPU, AutogradLazy, AutogradMeta, Tracer, AutocastCPU, AutocastXPU, AutocastMPS, AutocastCUDA, FuncTorchBatched, BatchedNestedTensor, FuncTorchVmapMode, Batched, VmapMode, FuncTorchGradWrapper, PythonTLSSnapshot, FuncTorchDynamicLayerFrontMode, PreDispatch, PythonDispatcher].
+ ```
+
+An error cauused by mismatch on `torchvision` not installed with CUDA support, solution : 
+- Reinstall `torchvision` with cuda support
+
+#### 11.30 
+Train for first time with settings : 
+```
+| Parameter        | Your Value         | Recommended for RTX 2050 4GB |
+|------------------|--------------------|------------------------------|
+| **Image Size**   | 512                | ✅ OK (recommended)          |
+| **Batch Size**   | 16                 | ⚠️ Likely too high — use 4–8 |
+| **Epochs**       | 75                 | ✅ OK                        |
+| **Train Images** | ~3500              | ✅ OK                        |
+| **Model**        | yolov8x            | ⚠️ Use `yolov8n/s.pt`        |
+```
+
+#### 12.30
+Train using s and n series also reduce the batch for better performance

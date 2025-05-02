@@ -311,3 +311,10 @@ F1-Score: [0.6349, 0.8725, 0.8009, 0.8483]
 Time Elapsed : 4.385 Hours
 ```
 Got Overfitted on 25 actually dont move that much, but also the batch didnt do anything on it, just causing laggy xD 
+
+#### 6.00 AM 
+After comparing the time needed and memory usage and all, the default test will be using 
+``` python 
+batch = 8 
+epoch = 50
+```

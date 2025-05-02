@@ -292,3 +292,22 @@ F1-Score: [0.5822, 0.8804, 0.7444, 0.9025]
 TIme elapsed : 122 Minutes
 ```
 
+#### 23.52 
+Running the Yolo 8m series with 12 Batch, and 50 Epoch 
+
+## 📅 Mei 3, 2025
+#### 5.30 A.M
+The training done with i think overfiting in lot cases lets see the Metrics
+```
+Model: yolov8_model
+Validation Time: 2025-05-03 04-18-51
+
+AP50: 0.8477
+AP: 0.8426
+Precision: 0.7549
+Recall: 0.8698
+F1-Score: [0.6349, 0.8725, 0.8009, 0.8483]
+
+Time Elapsed : 4.385 Hours
+```
+Got Overfitted on 25 actually dont move that much, but also the batch didnt do anything on it, just causing laggy xD 

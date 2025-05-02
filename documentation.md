@@ -318,3 +318,9 @@ After comparing the time needed and memory usage and all, the default test will 
 batch = 8 
 epoch = 50
 ```
+
+#### 6.10 AM 
+8 Batch seems to large for Yolov3, For any Model That seems largered a bit, will do it on google colab
+
+#### 6.41
+Commting Training for YOLOv5m

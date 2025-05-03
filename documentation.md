@@ -339,4 +339,16 @@ Precision: 0.7580
 Recall: 0.8503
 F1-Score: [0.5941, 0.9000, 0.7250, 0.8449]
 ```
-Approaching to 6, 7, 8, 9, 10, and 11
+Approaching to ~~6, 7,~~ 8, 9, 10, and 11
+
+#### Update, Forgot the time but now is 12.13 P.M
+
+Ultralytics Didn't support the version of 
+- YOLOv4
+  - Improvement that later Applied on YOLO 5
+- YOLOv6
+  - Implementation of `BiC module (Bi-directional Concatenation)`and `AAT(Anchor-Aided Training)`
+- YOLOv7
+  - Improves Real-time object detection features which it was `re-paramaterized ` model
+
+Because of its community created and bassically we need to take it more to them, but actually we dont really need it a lot since they were programmed to do some spesific work.

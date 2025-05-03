@@ -250,7 +250,7 @@ Error occured multiple times, further update will be created after Finishing pro
 #### 10.00 AM 
 Got Not Implemented Error, need to validate Yolo Labels on image and val
 
-#### 10.13 
+#### 10.13 A.M
 Torch vision Eror : 
 
 ```
@@ -260,7 +260,7 @@ NotImplementedError: Could not run 'torchvision::nms' with arguments from the 'C
 An error cauused by mismatch on `torchvision` not installed with CUDA support, solution : 
 - Reinstall `torchvision` with cuda support
 
-#### 11.30 
+#### 11.30 A.M
 Train for first time with settings : 
 ```
 | Parameter        | Your Value         | Recommended for RTX 2050 4GB |
@@ -292,7 +292,7 @@ F1-Score: [0.5822, 0.8804, 0.7444, 0.9025]
 TIme elapsed : 122 Minutes
 ```
 
-#### 23.52 
+#### 23.52 P.M
 Running the Yolo 8m series with 12 Batch, and 50 Epoch 
 
 ## 📅 Mei 3, 2025
@@ -322,5 +322,21 @@ epoch = 50
 #### 6.10 AM 
 8 Batch seems to large for Yolov3, For any Model That seems largered a bit, will do it on google colab
 
-#### 6.41
+#### 6.41 AM
 Commting Training for YOLOv5m
+
+#### 8.55 A.M
+Training With YOLOv5m is donewith result: 
+```
+Model: yolov5m_model
+Validation Time: 2025-05-03 08-55-28
+
+Training Duration: 2.219 hours for 50 epochs
+
+AP50: 0.8365
+AP: 0.8342
+Precision: 0.7580
+Recall: 0.8503
+F1-Score: [0.5941, 0.9000, 0.7250, 0.8449]
+```
+Approaching to 6, 7, 8, 9, 10, and 11

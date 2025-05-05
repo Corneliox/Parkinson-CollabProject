@@ -245,6 +245,8 @@ Revising the logic on `change_split_gui_selecteble.py` so it will :
 #### 13.00 PM 
 Error occured multiple times, further update will be created after Finishing project
 
+---
+---
 ## 📅 Mei 2, 2025
 
 #### 10.00 AM 
@@ -295,6 +297,8 @@ TIme elapsed : 122 Minutes
 #### 23.52 P.M
 Running the Yolo 8m series with 12 Batch, and 50 Epoch 
 
+---
+---
 ## 📅 Mei 3, 2025
 #### 5.30 A.M
 The training done with i think overfiting in lot cases lets see the Metrics
@@ -352,3 +356,53 @@ Ultralytics Didn't support the version of
   - Improves Real-time object detection features which it was `re-paramaterized ` model
 
 Because of its community created and bassically we need to take it more to them, but actually we dont really need it a lot since they were programmed to do some spesific work.
+
+---
+---
+## 📅 Mei 4 - 5, 2025
+#### 📅 Mei 4, 2025
+Im finishing for all series of YOLOv3, 5, 8-12 with minimal version which was : 
+- YOLOv3-u (Kaggle)
+- YOLOv5m ✅ (Local)
+- YOLOv5l ❌
+- YOLOv5x ❌
+- YOLOv8s ✅ (Local)
+- YOLOv8m ✅ (Local (@2))
+- YOLOv8l ❌
+- YOLOv8x ❌
+- YOLOv9m ✅ (Local)
+- YOLOv9c ✅ (Local)
+- YOLOv9e ❌
+- YOLOv10m ✅ (Kaggle)
+- YOLOv10b ✅ (Kaggle)
+- YOLOv10l ❌
+- YOLOv10x ❌
+- YOLO11m ✅ (Local)
+- YOLO11l ✅ (Kaggle)
+- YOLO11x ❌
+- YOLO12m ✅ (Local)
+- YOLO12l ❌
+- YOLO12x ✅ (Kaggle)
+  
+All of this epoch cost me about `35.35233333 Hours` or  `2121.14` Minutes in total
+
+Machine Used 
+- Google Colab
+  - Suck, cant even done 1 task :V
+- Kaggle 
+  - So Helpful, don't have any problem when doing code in kaggle
+  - Spesification : 
+    - 2x TPU4 GPU accelerator
+- Local
+  - Yah little bit longer, im using `Axioo Pongo 725`
+  - Spesification : 
+    - Intel I7-12650H
+    - RTX 2050 - 4 GB VRam
+    - 16 GB DDR 4 Ram 
+
+I would recommend Upgrade to > 8GBs VRAM GPU for better Local Processing and 32 GB's of RAM 🥲
+
+#### 📅 Mei 5, 2025
+Continuing Training for the rest models on kaggle and Local
+
+From last 2 days i learn that because my GPU Spesification was `(NVIDIA GeForce RTX 2050, 4096MiB)` Every RAM used more than 4GBs, Better to run it on kaggle, or else it would take a long time to finish, which it was not efficient.

@@ -1,7 +1,7 @@
 from pathlib import Path
 
-image_dir = Path("./Dataset/YOLODatasetFullOri/images/train")
-label_dir = Path("./Dataset/YOLODatasetFullOri/labels/train")
+image_dir = Path("./Dataset/YOLODatasetFull/images/train")
+label_dir = Path("./Dataset/YOLODatasetFull/labels/train")
 
 all_images = list(image_dir.glob("*.jpg")) + list(image_dir.glob("*.png"))
 valid_images = [img for img in all_images if (label_dir / (img.stem + ".txt")).exists()]

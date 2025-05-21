@@ -406,3 +406,33 @@ I would recommend Upgrade to > 8GBs VRAM GPU for better Local Processing and 32 
 Continuing Training for the rest models on kaggle and Local
 
 From last 2 days i learn that because my GPU Spesification was `(NVIDIA GeForce RTX 2050, 4096MiB)` Every RAM used more than 4GBs, Better to run it on kaggle, or else it would take a long time to finish, which it was not efficient.
+
+#### 📅 Mei 6 - Mei 20, 2025
+
+##### Mei 10
+Augmenting our training data, and the result there is about 6000 Image created  with train val is `6 : 0.7` with purpose : 
+- Balance the class on dataset
+- Add more data to train, so it wont bias
+
+##### Mei 11 
+Augment the dataset into 11k Dataset in total with only 700 dataset on Validation path
+
+##### Mei 18 
+Splitting the dataset into 80/20 format for Training and val
+which haveing a result of 
+
+Train 
+| Class 1 | Class 2 | Class 3 | Class 4 | 
+|---------|---------|---------|---------|
+|2367|2298|2436|2330| 
+Sum = 9431
+
+Val
+| Class 1 | Class 2 | Class 3 | Class 4 | 
+|---------|---------|---------|---------|
+|574|591|608|582|
+Sum = 2355
+
+The dataset is 11,786 Image in total or about `80% on Train` and `20% on Validation`
+
+Doing training on minimodel of each YOLO 5, 8, 9, 10, and 11

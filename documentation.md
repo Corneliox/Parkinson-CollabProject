@@ -216,10 +216,10 @@ Thanks to ChatGPT for the great help for minimalizing time, All File already Ren
 
 ```python
 -> util_512Mod.py  #Resizing all image into 512
-    -> util_512toYolo.py #Change into Yolo Format File
-        -> util_rename.py #Change name into one format to help labelling
-            -> util_autolabeling.py #Auto Label because 1 image, 1 item
-                -> util_merge_to_4_class_yolo.py #merge into Train and Val Yolo Only
+  -> util_rename.py #Change name into one format to help labelling
+    -> util_autolabeling.py #based on file Healthy/Wave = healthy_wave and so 
+      -> util_512toYolo.py #Change into Yolo Format File
+        -> util_merge_to_4_class_yolo.py #merge into Train and Val Yolo Only
 ```
 
 #### 12.00 AM 
@@ -436,3 +436,20 @@ Sum = 2355
 The dataset is 11,786 Image in total or about `80% on Train` and `20% on Validation`
 
 Doing training on minimodel of each YOLO 5, 8, 9, 10, and 11
+
+##### Mei 21 
+Updating on how the System Work 
+```python
+-> util_512Mod.py  #Resizing all image into 512
+  -> util_rename.py #Change name into one format to help labelling
+    -> util_autolabeling.py 
+       #Based on file Healthy/Wave = healthy_wave and so with others 
+       #Healthy/Spiral = healthy_spiral
+      -> util_512toYolo.py #Change into Yolo Format File
+        -> util_merge_to_4_class_yolo.py #merge into Train and Val Yolo Only
+          -> util_validate_3Augmenting.ipynb #Augment the data 
+            -> util_validate_4DataDistribution.ipynb 
+               #Rebalance the data into 80/20 Excluding augmented
+              -> util_yolo_label_reviewer.py
+                 #Review if there's any miss Label manually
+```

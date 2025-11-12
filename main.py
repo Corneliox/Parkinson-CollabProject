@@ -4,11 +4,11 @@ from PIL import Image
 from fastapi import FastAPI, File, UploadFile
 from typing import List
 from ultralytics import YOLO
-from fastapi.responses import FileResponse  # <-- Import this
+from fastapi.responses import FileResponse
 
-# --- Model Loading ---
+# --- Model Loading (No Change) ---
 try:
-    model = YOLO("best.pt") # <-- Changed to 'best.pt'
+    model = YOLO("best.pt")
     print("Model loaded successfully.")
 except Exception as e:
     print(f"Error loading model: {e}")
@@ -16,7 +16,7 @@ except Exception as e:
 
 app = FastAPI()
 
-# --- API Endpoint (No Change) ---
+# --- API Endpoint (UPDATED) ---
 @app.post("/detect/")
 async def detect_images(files: List[UploadFile] = File(...)):
     if not model:
@@ -30,27 +30,39 @@ async def detect_images(files: List[UploadFile] = File(...)):
         contents = await file.read()
         image = Image.open(io.BytesIO(contents))
         
-        results = model(image, conf=0.90) 
+        # --- Run Detection ---
+        # We don't set conf=0.90 here, we filter manually
+        results = model(image) 
         
-        if len(results) > 0 and results[0].probs is not None:
-            top_prob = results[0].probs.top1conf.item()
-            top_class_idx = results[0].probs.top1
-            class_name = model.names[top_class_idx]
-            
-            if top_prob < 0.90:
-                class_name = "Undetermined"
-                top_prob = 0.0
-        else:
-            class_name = "No Result"
-            top_prob = 0.0
+        # --- NEW DETECTION LOGIC ---
+        best_confidence = 0.0
+        best_class_name = "No Result" # Default if nothing is found
 
+        # Check if any boxes were detected
+        if len(results[0].boxes) > 0:
+            # Find the box with the highest confidence score
+            for box in results[0].boxes:
+                conf = box.conf.item() # Get confidence (e.g., 0.95)
+                
+                if conf > best_confidence:
+                    best_confidence = conf
+                    class_idx = int(box.cls.item()) # Get class index (e.g., 0, 1)
+                    best_class_name = model.names[class_idx] # Get name (e.g., 'Parkinson')
+
+        # --- NOW we check your 0.90 threshold ---
+        if best_confidence < 0.90:
+            best_class_name = "Undetermined"
+            # Keep best_confidence to show the score, or set to 0.0
+            # best_confidence = 0.0 
+        
         detection_results.append({
-            "class_name": class_name,
-            "confidence": top_prob
+            "class_name": best_class_name,
+            "confidence": best_confidence
         })
-        confidence_scores.append(top_prob)
-        class_names.append(class_name)
+        confidence_scores.append(best_confidence)
+        class_names.append(best_class_name)
 
+    # --- Averaging Logic (No Change) ---
     avg_confidence = sum(confidence_scores) / len(confidence_scores) if confidence_scores else 0
     final_class = max(set(class_names), key=class_names.count) if class_names else "N/A"
 
@@ -60,16 +72,15 @@ async def detect_images(files: List[UploadFile] = File(...)):
         "final_result": final_class
     }
 
-# --- Serve Frontend Files (UPDATED) ---
-
+# --- Serve Frontend Files (No Change) ---
 @app.get("/")
 def read_root():
     return FileResponse('index.html')
 
-@app.get("/app.js") # <-- This is the fix for the 404
+@app.get("/app.js")
 def read_app_js():
     return FileResponse('app.js')
 
-@app.get("/style.css") # <-- This serves your new style
+@app.get("/style.css")
 def read_style_css():
     return FileResponse('style.css')

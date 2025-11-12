@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Parkinson's Detection</title>
-    <style>
-        video { transform: scaleX(-1); } /* Flip for mirror view */
-        img { width: 200px; margin: 5px; }
-        #results { margin-top: 20px; }
-        .result-item { border: 1px solid #ccc; padding: 10px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Parkinson's Drawing Test</h2>
-    <video id="video-feed" width="640" height="480" autoplay></video>
-    <br>
-    <button id="snap-button">Snap (5 Photos)</button>
-
-    <hr>
-    <h3>Results</h3>
-    <div id="results-container"></div>
-    <div id="final-result"></div>
+    <div class="container">
+        <h1>Parkinson's Drawing Test</h1>
+        
+        <button id="start-cam-button">Start Camera</button>
+        
+        <div class="video-container" id="video-wrapper" style="display: none;">
+            <video id="video-feed" autoplay playsinline></video>
+        </div>
+        
+        <button id="snap-button" style="display: none;">Snap (5 Photos)</button>
+        
+        <div id="results-container" class="result"></div>
+        <div id="final-result" class="result"></div>
+    </div>
+    
+    <script src="app.js"></script>
 </body>
-<script src="app.js"></script>
 </html>

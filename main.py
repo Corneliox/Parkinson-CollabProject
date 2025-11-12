@@ -5,13 +5,10 @@ from fastapi import FastAPI, File, UploadFile
 from typing import List
 from ultralytics import YOLO
 from fastapi.responses import FileResponse  # <-- Import this
-from fastapi.staticfiles import StaticFiles  # <-- Import this
 
 # --- Model Loading ---
-# Assuming 'yolo11n' is your model file, e.g., 'yolov8n-cls.pt'
-# Place your 'your_model.pt' file in the same directory
 try:
-    model = YOLO("best.pt") 
+    model = YOLO("best.pt") # <-- Changed to 'best.pt'
     print("Model loaded successfully.")
 except Exception as e:
     print(f"Error loading model: {e}")
@@ -22,8 +19,6 @@ app = FastAPI()
 # --- API Endpoint (No Change) ---
 @app.post("/detect/")
 async def detect_images(files: List[UploadFile] = File(...)):
-    # (The detection logic from the previous answer goes here)
-    # (This code block is unchanged)
     if not model:
         return {"error": "Model not loaded"}, 500
 
@@ -35,9 +30,6 @@ async def detect_images(files: List[UploadFile] = File(...)):
         contents = await file.read()
         image = Image.open(io.BytesIO(contents))
         
-        # --- Run Detection ---
-        # NOTE: This logic assumes a CLASSIFICATION model.
-        # See the section below if you are using a DETECTION model.
         results = model(image, conf=0.90) 
         
         if len(results) > 0 and results[0].probs is not None:
@@ -68,13 +60,16 @@ async def detect_images(files: List[UploadFile] = File(...)):
         "final_result": final_class
     }
 
-# --- Serve Frontend Files (NEW) ---
-# This part serves your 'index.html' and 'app.js' files
-
-# Mount the 'app.js' file
-app.mount("/static", StaticFiles(directory="."), name="static")
+# --- Serve Frontend Files (UPDATED) ---
 
 @app.get("/")
 def read_root():
-    # Serve the 'index.html' file
     return FileResponse('index.html')
+
+@app.get("/app.js") # <-- This is the fix for the 404
+def read_app_js():
+    return FileResponse('app.js')
+
+@app.get("/style.css") # <-- This serves your new style
+def read_style_css():
+    return FileResponse('style.css')

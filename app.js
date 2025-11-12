@@ -4,43 +4,73 @@ const snapButton = document.getElementById('snap-button');
 const resultsContainer = document.getElementById('results-container');
 const finalResultDiv = document.getElementById('final-result');
 
-// 1. Turn on the camera
+// --- NEW Elements ---
+const startCamButton = document.getElementById('start-cam-button');
+const videoWrapper = document.getElementById('video-wrapper');
+
+
+// 1. Turn on the camera (NOW CALLED BY BUTTON)
 async function startCamera() {
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ 
-            video: { facingMode: 'user' } // Use 'environment' for back camera
-        });
+        // --- UPDATED to request 1:1 aspect ratio ---
+        const constraints = {
+            video: { 
+                aspectRatio: 1.0, 
+                facingMode: 'user' 
+            }
+        };
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
         video.srcObject = stream;
+        
+        // --- On success, show camera and hide start button ---
+        videoWrapper.style.display = 'flex';
+        snapButton.style.display = 'block';
+        startCamButton.style.display = 'none';
+        
     } catch (err) {
         console.error("Error accessing camera: ", err);
+        alert("Could not access camera. Please grant permission in your browser settings.");
     }
 }
 
-// (Add this to the 'app.js' file from earlier)
+// --- NEW: Attach camera logic to the button ---
+startCamButton.addEventListener('click', startCamera);
 
+// (The rest of the file is the same)
+
+// --- Event Listener ---
 snapButton.addEventListener('click', snapAndProcess);
 
 async function snapAndProcess() {
-    resultsContainer.innerHTML = "Processing...";
+    resultsContainer.innerHTML = "<h3>Processing 5 Photos...</h3>";
     finalResultDiv.innerHTML = "";
     
     const formData = new FormData();
-    const capturedImages = []; // To store images for display
+    const capturedImages = [];
 
     // --- 3. Capture 5 Images ---
     for (let i = 0; i < 5; i++) {
         const canvas = document.createElement('canvas');
+        
+        // --- Make canvas square to match video ---
         canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
+        canvas.height = video.videoWidth; // Use width for both
         
-        // Draw the current video frame to the canvas
         const ctx = canvas.getContext('2d');
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         
-        // Store the image data URL for display
+        // --- Center the 1:1 video feed onto the 1:1 canvas ---
+        // (This logic handles if the feed isn't perfectly square)
+        const size = Math.min(video.videoWidth, video.videoHeight);
+        const x = (video.videoWidth - size) / 2;
+        const y = (video.videoHeight - size) / 2;
+
+        // Draw and flip
+        ctx.translate(canvas.width, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(video, x, y, size, size, 0, 0, canvas.width, canvas.height);
+        
         capturedImages.push(canvas.toDataURL('image/jpeg'));
 
-        // Convert canvas to a 'Blob' to send to the server
         await new Promise(resolve => {
             canvas.toBlob(blob => {
                 formData.append('files', blob, `snapshot_${i}.jpg`);
@@ -48,7 +78,6 @@ async function snapAndProcess() {
             }, 'image/jpeg');
         });
         
-        // Wait a tiny bit for a new frame (e.g., 200ms)
         await new Promise(resolve => setTimeout(resolve, 200));
     }
 
@@ -60,27 +89,25 @@ async function snapAndProcess() {
         });
         const data = await response.json();
         
-        // --- 5. Display Results ---
         displayResults(data, capturedImages);
 
     } catch (err) {
         console.error("Error sending images: ", err);
-        resultsContainer.innerHTML = "Error processing images.";
+        resultsContainer.innerHTML = "<h3>Error processing images.</h3>";
     }
 }
 
 function displayResults(data, images) {
-    resultsContainer.innerHTML = ""; // Clear "Processing..."
+    resultsContainer.innerHTML = "<h2>Individual Results:</h2>"; 
     
-    // 1. Display 5 Photos + Individual Results
     data.individual_results.forEach((result, index) => {
         const img = document.createElement('img');
-        img.src = images[index]; // Use the captured image
+        img.src = images[index]; 
 
-        const resultText = document.createElement('p');
+        const resultText = document.createElement('div');
         resultText.innerHTML = `
-            <b>Result:</b> ${result.class_name} <br>
-            <b>Confidence:</b> ${(result.confidence * 100).toFixed(2)}%
+            <p><b>Result:</b> ${result.class_name}</p>
+            <p><b>Confidence:</b> ${(result.confidence * 100).toFixed(2)}%</p>
         `;
         
         const itemDiv = document.createElement('div');
@@ -90,12 +117,8 @@ function displayResults(data, images) {
         resultsContainer.appendChild(itemDiv);
     });
 
-    // 2. Display Final Average Result
     finalResultDiv.innerHTML = `
-        <hr>
         <h3>Final Diagnosis (Majority Vote): ${data.final_result}</h3>
         <h3>Average Confidence Score: ${(data.average_confidence * 100).toFixed(2)}%</h3>
     `;
 }
-
-startCamera();

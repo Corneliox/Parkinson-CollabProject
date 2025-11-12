@@ -4,12 +4,14 @@ from PIL import Image
 from fastapi import FastAPI, File, UploadFile
 from typing import List
 from ultralytics import YOLO
+from fastapi.responses import FileResponse  # <-- Import this
+from fastapi.staticfiles import StaticFiles  # <-- Import this
 
 # --- Model Loading ---
-# Load your pre-trained .pt model
-# This assumes it's a YOLOv8 classification or detection model
+# Assuming 'yolo11n' is your model file, e.g., 'yolov8n-cls.pt'
+# Place your 'your_model.pt' file in the same directory
 try:
-    model = YOLO("your_model.pt") 
+    model = YOLO("best.pt") 
     print("Model loaded successfully.")
 except Exception as e:
     print(f"Error loading model: {e}")
@@ -17,12 +19,11 @@ except Exception as e:
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"status": "Parkinson Detection API is running"}
-
+# --- API Endpoint (No Change) ---
 @app.post("/detect/")
 async def detect_images(files: List[UploadFile] = File(...)):
+    # (The detection logic from the previous answer goes here)
+    # (This code block is unchanged)
     if not model:
         return {"error": "Model not loaded"}, 500
 
@@ -30,33 +31,24 @@ async def detect_images(files: List[UploadFile] = File(...)):
     confidence_scores = []
     class_names = []
 
-    # --- Inference on 5 Images ---
     for file in files:
-        # Read image
         contents = await file.read()
         image = Image.open(io.BytesIO(contents))
         
         # --- Run Detection ---
-        # Set confidence threshold to 0.90 as requested
-        # Note: YOLO's `conf` is for *detection* boxes. For *classification*,
-        # the top result is usually what you want, but we can still filter.
-        # For a pure classification model, you'd check `results[0].probs.top1conf`.
-        
+        # NOTE: This logic assumes a CLASSIFICATION model.
+        # See the section below if you are using a DETECTION model.
         results = model(image, conf=0.90) 
         
-        # Process result for this one image
         if len(results) > 0 and results[0].probs is not None:
-            # This is for a Classification model
-            top_prob = results[0].probs.top1conf.item() # Get top confidence
-            top_class_idx = results[0].probs.top1    # Get top class index
-            class_name = model.names[top_class_idx]  # Get class name
+            top_prob = results[0].probs.top1conf.item()
+            top_class_idx = results[0].probs.top1
+            class_name = model.names[top_class_idx]
             
-            # Since you set conf=0.90, we can use it as a filter
             if top_prob < 0.90:
                 class_name = "Undetermined"
-                top_prob = 0.0 # Or top_prob, if you want to show it anyway
+                top_prob = 0.0
         else:
-            # Handle no detection or different model type
             class_name = "No Result"
             top_prob = 0.0
 
@@ -67,19 +59,22 @@ async def detect_images(files: List[UploadFile] = File(...)):
         confidence_scores.append(top_prob)
         class_names.append(class_name)
 
-    # --- Calculate Average and Final Result ---
-    
-    # 1. Average Confidence
     avg_confidence = sum(confidence_scores) / len(confidence_scores) if confidence_scores else 0
-
-    # 2. Final Result (Majority Vote)
-    if class_names:
-        final_class = max(set(class_names), key=class_names.count)
-    else:
-        final_class = "N/A"
+    final_class = max(set(class_names), key=class_names.count) if class_names else "N/A"
 
     return {
         "individual_results": detection_results,
         "average_confidence": avg_confidence,
         "final_result": final_class
     }
+
+# --- Serve Frontend Files (NEW) ---
+# This part serves your 'index.html' and 'app.js' files
+
+# Mount the 'app.js' file
+app.mount("/static", StaticFiles(directory="."), name="static")
+
+@app.get("/")
+def read_root():
+    # Serve the 'index.html' file
+    return FileResponse('index.html')

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Parkinson's Detection</title>
+    <style>
+        video { transform: scaleX(-1); } /* Flip for mirror view */
+        img { width: 200px; margin: 5px; }
+        #results { margin-top: 20px; }
+        .result-item { border: 1px solid #ccc; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Parkinson's Drawing Test</h2>
+    <video id="video-feed" width="640" height="480" autoplay></video>
+    <br>
+    <button id="snap-button">Snap (5 Photos)</button>
+
+    <hr>
+    <h3>Results</h3>
+    <div id="results-container"></div>
+    <div id="final-result"></div>
+</body>
+<script src="app.js"></script>
+</html>

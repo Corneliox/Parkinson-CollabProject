@@ -1,0 +1,123 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fef6e4; /* Soft yellow */
+    color: #001858; /* Deep blue */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Ensure full viewport height */
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+.container {
+    max-width: 800px;
+    width: 100%; /* Make container responsive */
+    padding: 30px;
+    background-color: #fff; /* White container background */
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+h1, h2, h3 {
+    color: #f582ae; /* Vibrant pink */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.video-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    width: 100%; /* Make video container responsive */
+}
+
+#video-feed {
+    border: 4px solid #f582ae;
+    border-radius: 15px;
+    max-width: 100%;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    
+    /* Default to no flip, JS will handle it */
+    transform: scaleX(1);
+    
+    /* --- 1:1 RULES --- */
+    aspect-ratio: 1 / 1;
+    object-fit: cover; /* This will crop the video to fit 1:1 */
+}
+
+/* --- NEW: Container for buttons --- */
+.controls-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap; /* Allow buttons to wrap on small screens */
+}
+
+button {
+    display: block;
+    margin: 10px auto; /* Center button */
+    padding: 12px 24px;
+    font-size: 18px;
+    background-color: #f582ae;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+    flex-grow: 1; /* Allow buttons to share space */
+    min-width: 180px; /* Ensure buttons don't get too small */
+}
+
+button:hover {
+    background-color: #ffb3c6; /* Lighter pink on hover */
+}
+
+/* This is the container for ALL results */
+.result {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #fdf0d5; /* Light beige result area */
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    text-align: left; /* Align text within the result */
+}
+
+/* This is for EACH of the 5 image results */
+.result-item {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* Stack image and text on small screens */
+    align-items: center;
+    gap: 15px;
+}
+
+.result-item img {
+    border: 2px solid #ddd; /* Light gray border */
+    border-radius: 12px;
+    
+    /* --- 1:1 RULES for result image --- */
+    width: 150px; /* Fixed width */
+    height: 150px; /* Fixed height */
+    object-fit: cover; /* Ensure it's square */
+}
+
+/* Media query for better responsive layout */
+@media (min-width: 600px) {
+    .result-item {
+        flex-direction: row; /* Side-by-side on larger screens */
+    }
+
+    .result-item img {
+        width: 200px;
+        height: 200px;
+    }
+}

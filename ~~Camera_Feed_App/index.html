@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Parkinson's Detection</title>
+    <!-- This links your new stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Parkinson's Drawing Test</h1>
+        
+        <!-- This button asks for permission -->
+        <button id="start-cam-button">Start Camera</button>
+        
+        <!-- This container holds the video feed -->
+        <div class="video-container" id="video-wrapper" style="display: none;">
+            <video id="video-feed" autoplay playsinline></video>
+        </div>
+        
+        <!-- NEW: This container holds both control buttons -->
+        <div class="controls-container">
+            <!-- This button is for snapping photos -->
+            <button id="snap-button" style="display: none;">Snap (5 Photos)</button>
+            
+            <!-- NEW: This button switches the camera -->
+            <button id="switch-cam-button" style="display: none;">Switch Camera</button>
+        </div>
+        
+        <!-- This ID holds the 5 individual results -->
+        <div id="results-container" class="result">
+            <!-- Results will be injected here by JS -->
+        </div>
+        
+        <!-- This ID holds the final average result -->
+        <div id="final-result" class="result"></div>
+    </div>
+    
+    <!-- This links your JavaScript file -->
+    <script src="app.js"></script>
+</body>
+</html>

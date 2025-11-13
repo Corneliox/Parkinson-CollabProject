@@ -50,7 +50,7 @@ async def detect_images(files: List[UploadFile] = File(...)):
                     best_class_name = model.names[class_idx] # Get name (e.g., 'Parkinson')
 
         # --- NOW we check your 0.90 threshold ---
-        if best_confidence < 0.90:
+        if best_confidence < 0.60:
             best_class_name = "Undetermined"
             # Keep best_confidence to show the score, or set to 0.0
             # best_confidence = 0.0 

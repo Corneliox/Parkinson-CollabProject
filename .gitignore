@@ -11,7 +11,7 @@ __pycache__/*
 *.tar.gz
 *.zip
 results/*
-Models/*.pt
+*.pt
 *.pth
 *.json
 *.log
